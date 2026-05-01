@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "interview.co",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <section>
           {children}
         </section>
+      <Footer />
       </body>
     </html>
   );

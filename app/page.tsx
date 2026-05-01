@@ -1,5 +1,7 @@
-import Features from "@/components/Features";
-import Hero from "@/components/Hero";
+import Cta from "@/components/Home/Cta";
+import Features from "@/components/Home/Features";
+import Hero from "@/components/Home/Hero";
+import HowItWorks from "@/components/Home/Howitworks";
 
 
 export default function Home() {
@@ -7,6 +9,8 @@ export default function Home() {
     <div>
       <Hero />
       <Features />
+      <HowItWorks />
+      <Cta />
     </div>
   );
 }

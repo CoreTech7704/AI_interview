@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-base-200 border-t border-base-300 px-6 py-10">
@@ -15,9 +17,9 @@ export default function Footer() {
 
         {/* Links */}
         <div className="flex gap-6 text-sm">
-          <a className="link link-hover">Features</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">GitHub</a>
+          <Link href="#" className="link link-hover">Features</Link>
+          <Link href="#" className="link link-hover">Contact</Link>
+          <Link href="#" className="link link-hover">GitHub</Link>
         </div>
 
         {/* Right */}

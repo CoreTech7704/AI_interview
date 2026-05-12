@@ -28,34 +28,50 @@ export default function ChatWindow() {
     });
   }, [messages, isTyping]);
 
-  const handleSend = (text: string) => {
-    const userMessage: Message = {
-      role: "user",
-      content: text,
+  const handleSend = async (text: string) => {
+  const userMessage: Message = {
+    role: "user",
+    content: text,
+  };
+
+  setMessages((prev) => [...prev, userMessage]);
+
+  setIsTyping(true);
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: text,
+      }),
+    });
+
+    const data = await response.json();
+
+    const aiMessage: Message = {
+      role: "ai",
+      type: "feedback",
+      content: data.reply,
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages((prev) => [...prev, aiMessage]);
 
-    setIsTyping(true);
+  } catch (error) {
+    console.error(error);
 
-    setTimeout(() => {
-      const aiReply: Message = {
-        role: "ai",
-        type: "feedback",
-        content:
-          "Great answer! A closure is a function that has access to its own scope, the outer function's scope, and the global scope.",
-      };
-
-      setMessages((prev) => [...prev, aiReply]);
-      setIsTyping(false);
-    }, 1200);
-  };
+  } finally {
+    setIsTyping(false);
+  }
+};
 
   return (
     <div className="flex flex-col h-screen">
       {/* Header */}
       <div className="p-4 border-b border-base-300">
-        <h2 className="font-semibold">Frontend Interview</h2>
+        <h2 className="font-semibold">Interview</h2>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 pb-8 space-y-2">

@@ -16,14 +16,12 @@ export default function Navbar() {
           {/* Optional links (keep minimal) */}
           <ul className="menu menu-horizontal px-1 hidden md:flex">
             <li>
-              <a>Features</a>
+              <Link href="#">Features</Link>
             </li>
           </ul>
 
           {/* CTA Button */}
-          <Link href="/interview" className="btn btn-primary mt-1">
-            Start Interview
-          </Link>
+          <button className="btn btn-primary mt-1">Start Interview</button>
         </div>
       </div>
     </nav>

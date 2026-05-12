@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function CTA() {
   return (
     <section className="py-20 px-6 bg-primary text-primary-content">
@@ -15,9 +17,9 @@ export default function CTA() {
 
         {/* Button */}
         <div className="mt-8">
-          <button className="btn btn-secondary px-8 text-base font-semibold">
+          <Link href="/interview" className="btn btn-secondary px-8 text-base font-semibold">
             Start Interview
-          </button>
+          </Link>
         </div>
 
       </div>

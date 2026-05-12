@@ -21,7 +21,12 @@ export default function Navbar() {
           </ul>
 
           {/* CTA Button */}
-          <button className="btn btn-primary mt-1">Start Interview</button>
+          <Link
+            href="/interview"
+            className="btn btn-primary mt-1"
+          >
+            Start Interview
+          </Link>
         </div>
       </div>
     </nav>

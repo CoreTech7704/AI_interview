@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function Hero() {
   return (
     <section className="min-h-[80vh] flex items-center justify-center px-6 bg-base-200">
@@ -27,9 +28,13 @@ export default function Hero() {
 
         {/* Buttons */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button className="btn btn-primary px-8">Start Interview</button>
+          <Link href="/interview" className="btn btn-primary px-8">
+            Start Interview
+          </Link>
 
-          <button className="btn btn-outline px-8">Learn More</button>
+          <Link href="#" className="btn btn-outline px-8">
+            Learn More
+          </Link>
         </div>
       </div>
     </section>

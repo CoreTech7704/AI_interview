@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ChatBubble from "./ChatBubble";
 import InputBox from "./InputBox";
 
 type Message = {
   role: "ai" | "user";
   content: string;
+  type?: "question" | "feedback" | "system";
 };
 
 export default function ChatWindow() {
@@ -14,10 +15,18 @@ export default function ChatWindow() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "ai",
+      type: "question",
       content:
         "Welcome! Let's start your interview. What is closure in JavaScript?",
     },
   ]);
+
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [messages, isTyping]);
 
   const handleSend = (text: string) => {
     const userMessage: Message = {
@@ -32,6 +41,7 @@ export default function ChatWindow() {
     setTimeout(() => {
       const aiReply: Message = {
         role: "ai",
+        type: "feedback",
         content:
           "Great answer! A closure is a function that has access to its own scope, the outer function's scope, and the global scope.",
       };
@@ -48,8 +58,7 @@ export default function ChatWindow() {
         <h2 className="font-semibold">Frontend Interview</h2>
       </div>
 
-      {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-2">
+      <div className="flex-1 overflow-y-auto p-4 pb-8 space-y-2">
         {messages.map((msg, i) => (
           <ChatBubble key={i} message={msg} />
         ))}
@@ -59,6 +68,9 @@ export default function ChatWindow() {
             <div className="chat-bubble opacity-70">Typing...</div>
           </div>
         )}
+
+        {/* Bottom anchor */}
+        <div ref={bottomRef} />
       </div>
 
       {/* Input */}

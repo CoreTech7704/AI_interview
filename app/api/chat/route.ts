@@ -26,6 +26,14 @@ export async function POST(req: Request) {
         - Avoid long explanations.
         - Sound professional and realistic.
 
+        Respond ONLY with valid JSON.
+
+        Example:
+        {
+          "feedback": "Short feedback here",
+          "question": "Next interview question here"
+        }
+
         Candidate Answer:
         ${body.message}
         `,
@@ -33,7 +41,6 @@ export async function POST(req: Request) {
     }),
   });
 
-  
   const data = await response.json();
 
   return NextResponse.json({

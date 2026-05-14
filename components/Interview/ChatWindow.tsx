@@ -106,21 +106,36 @@ export default function ChatWindow() {
           category: selectedCategory,
         }),
       });
-
       const data = await response.json();
 
-      const aiMessage: Message = {
+      const parsed = JSON.parse(data.reply);
+
+      const feedback = parsed.feedback;
+      const question = parsed.question;
+
+      const feedbackMessage: Message = {
         role: "ai",
         type: "feedback",
-        content: data.reply,
+        content: feedback,
       };
 
-      setMessages((prev) => [...prev, aiMessage]);
+      setMessages((prev) => [...prev, feedbackMessage]);
 
-      setQuestionCount((prev) => prev + 1);
+      setTimeout(() => {
+        const questionMessage: Message = {
+          role: "ai",
+          type: "question",
+          content: question,
+        };
+
+        setMessages((prev) => [...prev, questionMessage]);
+
+        setQuestionCount((prev) => prev + 1);
+
+        setIsTyping(false);
+      }, 1000);
     } catch (error) {
       console.error(error);
-    } finally {
       setIsTyping(false);
     }
   };
@@ -141,7 +156,9 @@ export default function ChatWindow() {
             <div className="badge badge-primary badge-outline">
               {selectedCategory}
             </div>
-            <p className="text-xs mt-1 opacity-70">Question {questionCount || 1}</p>
+            <p className="text-xs mt-1 opacity-70">
+              Question {questionCount || 1}
+            </p>
           </div>
         )}
       </div>
